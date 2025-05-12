@@ -110,8 +110,26 @@ export class RegistroMaestrosComponent implements OnInit{
   }
 
   public actualizar(){
+    //Validación
+   this.errors = [];
 
-  }
+   this.errors = this.maestrosService.validarMaestro(this.maestro, this.editar);
+   if(!$.isEmptyObject(this.errors)){
+     return false;
+   }
+   console.log("Pasó la validación");
+
+   this.maestrosService.editarMaestro(this.maestro).subscribe(
+     (response)=>{
+       alert("Maestro editado correctamente");
+       console.log("Maestro editado: ", response);
+       //Si se editó, entonces mandar al home
+       this.router.navigate(["home"]);
+     }, (error)=>{
+       alert("No se pudo editar el maestro");
+     }
+   );
+ }
 
   public checkboxChange(event:any){
     console.log("Evento: ", event);

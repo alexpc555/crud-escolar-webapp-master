@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { AlumnosService } from 'src/app/services/alumnos.service';
+import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
 
 
 
@@ -98,11 +99,29 @@ export class AlumnosScreenComponent implements OnInit{
   }
 
   public goEditar(idUser: number){
+    this.router.navigate(["registro-usuarios/alumno/"+idUser]);
 
   }
 
   public delete(idUser: number){
-
+       //console.log("User:", idUser);
+    const dialogRef = this.dialog.open(EliminarUserModalComponent,{
+      data: {id: idUser, rol: 'alumno'}, //Se pasan valores a través del componente
+      height: '288px',
+      width: '328px',
+    });
+    //Esta se ejecuta después de un evento que cierra el modal
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isDelete){
+        console.log("Alumno eliminado");
+        //Recargar página
+        alert("Alumno eliminado correctamente");
+        window.location.reload();
+      }else{
+        alert("Alumno no eliminado ");
+        console.log("No se eliminó el Alumno");
+      }
+    });
   }
 }
 
