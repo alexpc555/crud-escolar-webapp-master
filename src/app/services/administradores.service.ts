@@ -134,3 +134,4 @@ var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorizat
 return this.http.delete<any>(`${environment.url_api}/admins-edit/?id=${idUser}`,{headers:headers});
 }
 }
+
