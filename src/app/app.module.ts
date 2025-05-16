@@ -44,6 +44,8 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
 import { NgChartsModule } from 'ng2-charts';
 import { RegistroEventosComponent } from './screens/registro-eventos/registro-eventos.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

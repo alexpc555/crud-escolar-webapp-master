@@ -1,1 +1,66 @@
-<div>funciona</div>
+<div class="wrapper">
+  <div class="section-registro">
+    <div class="body-registro">
+      <div class="row mt-3 mb-3">
+        <div class="form-group col-12">
+          <label class="title-user">Ingresa los datos del evento</label>
+        </div>
+      </div>
+
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Título del evento</mat-label>
+        <input matInput [(ngModel)]="evento.titulo" placeholder="Escribe el título del evento">
+      </mat-form-field>
+      <div *ngIf="errors.titulo" class="invalid-feedback">{{ errors.titulo }}</div>
+
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="evento.descripcion" placeholder="Escribe la descripción"></textarea>
+      </mat-form-field>
+      <div *ngIf="errors.descripcion" class="invalid-feedback">{{ errors.descripcion }}</div>
+
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Programa educativo</mat-label>
+        <mat-select [(ngModel)]="evento.programa_educativo">
+          <mat-option *ngFor="let programa of programas" [value]="programa">
+            {{programa}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.programa_educativo" class="invalid-feedback">{{ errors.programa_educativo }}</div>
+
+      <div class="checkbox-group">
+        <label class="title-materias">Público objetivo</label>
+        <mat-checkbox *ngFor="let publico of publicos" 
+                      (change)="checkboxPublicoChange($event)"
+                      [checked]="revisarPublico(publico)"
+                      [value]="publico">
+          {{publico}}
+        </mat-checkbox>
+      </div>
+      <div *ngIf="errors.publico_objetivo" class="invalid-feedback">{{ errors.publico_objetivo }}</div>
+
+     <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="evento.fecha_inicio" (focus)="pickerInicio.open()" (dateChange)="changeFechaInicio($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="errors.fecha_inicio" class="invalid-feedback">{{ errors.fecha_inicio }}</div>
+
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Fecha de fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" [(ngModel)]="evento.fecha_fin" (focus)="pickerFin.open()" (dateChange)="changeFechaFin($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="errors.fecha_fin" class="invalid-feedback">{{ errors.fecha_fin }}</div>
+
+      <div class="section-buttons">
+        <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+        <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
+        <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="actualizar()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

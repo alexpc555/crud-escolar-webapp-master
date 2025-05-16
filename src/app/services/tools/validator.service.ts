@@ -76,5 +76,10 @@ export class ValidatorService {
     console.log(pat.test(input), input);
     return pat.test(input);
   }
+  wordsAndNumbers(input: any) {
+  let pat = new RegExp('^[A-Za-zÑñáéíóúÁÉÍÓÚ0-9 ]+$');
+  return pat.test(input);
+}
+
 
 }
