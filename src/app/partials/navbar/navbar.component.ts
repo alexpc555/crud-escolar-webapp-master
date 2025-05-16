@@ -37,6 +37,10 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(["registro-usuarios"]);
   }
 
+  public goEventos(){
+    this.router.navigate(["registro"]);
+  }
+
   //Cerrar sesión
   public logout(){
     this.facadeService.logout().subscribe(
